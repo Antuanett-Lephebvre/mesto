@@ -1,0 +1,11 @@
+.button_icon-closed {
+    z-index: 2;
+    transform: rotate(-45deg);
+    height: 40px;
+}
+
+@media (max-width: 700px){
+    .button_icon-closed {
+        height: 26px;
+    }
+}

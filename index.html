@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mesto</title>
+  <meta name="description" content="Интерактивная страница с фотографиями">
+  <meta name="author" content="Морозова Екатерина">
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo opacity" src="./images/logo.svg" alt="Логотип Место">
+    <img class="header__line" src="./images/line.svg" alt="Линия">
+  </header>
+  <main>
+    <section class="profile">
+     <div class="profile_left">
+      <img class="profile__photo" src="./images/photo.jpg" alt="Фото профиля">
+      <div class="profile_center">
+      <div class="info">
+        <h1 class="info__title">Жак-Ив Кусто</h1>
+        <p class="info__subtitle">Исследователь океана</p>
+       </div>
+       <button type="button" class="button button_edit opacity">
+        <img class="button_icon-edit" src="./images/pen.svg">
+       </button>
+       </div>
+       </div>
+     <div class="profile_right">
+      <button type="button" class="button button_add opacity">
+        <img class="button_icon-add" src="./images/plus.svg">
+      </button>
+     </div>
+    </section>
+    <section class="photo-grid">
+      <div class="container">
+       <img class="container__photo" src="./images/karachaevsk.jpg">
+       <div class="text-container">
+        <h2 class="text-container__title">Карачаевск</h2>
+        <button type="button" class="text-container__like opacity opacity_like"></button>
+       </div>
+      </div>
+      <div class="container">
+        <img class="container__photo" src="./images/albrus.jpg">
+        <div class="text-container">
+         <h2 class="text-container__title">Гора Эльбрус</h2>
+         <button type="button" class="text-container__like opacity opacity_like"></button>
+        </div>
+       </div>
+       <div class="container">
+        <img class="container__photo" src="./images/dombai.jpg">
+        <div class="text-container">
+         <h2 class="text-container__title">Домбай</h2>
+         <button type="button" class="text-container__like opacity opacity_like"></button>
+        </div>
+       </div>
+       <div class="container">
+        <img class="container__photo" src="./images/albrus.jpg">
+        <div class="text-container">
+         <h2 class="text-container__title">Гора Эльбрус</h2>
+         <button type="button" class="text-container__like opacity opacity_like"></button>
+        </div>
+       </div>
+       <div class="container">
+        <img class="container__photo" src="./images/dombai.jpg">
+        <div class="text-container">
+         <h2 class="text-container__title">Домбай</h2>
+         <button type="button" class="text-container__like opacity opacity_like"></button>
+        </div>
+       </div>
+       <div class="container">
+        <img class="container__photo" src="./images/karachaevsk.jpg">
+        <div class="text-container">
+         <h2 class="text-container__title">Карачаево-Черкесск</h2>
+         <button type="button" class="text-container__like opacity opacity_like"></button>
+        </div>
+       </div>
+    </section>
+    <footer class="footer">
+     <p class="footer__text">&copy; 2020 Mesto Russia</p>
+    </footer>
+    <section class="popup">
+     <div class="popup__container">
+     <button type="button" class="button button_closed opacity">
+      <img class="button_icon-closed" src="./images/plus.svg">
+     </button>
+     <form class="popup__form">
+      <h2 class="popup__title">Редактировать профиль</h2>
+       <fieldset class="input-container">
+        <input class="input-container__area_name input-container__area"  type="text" name="name">
+        <input class="input-container__area input-container__area_about"  type="text" name="about">
+        <button type="submit" class="button button_saved opacity opacity_button">Сохранить</button>
+      </fieldset>
+     </form>
+     </div>
+    </section>
+  </main>
+  <script src="./index.js"></script>
+</body>
+
+</html>

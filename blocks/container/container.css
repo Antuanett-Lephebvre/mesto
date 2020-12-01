@@ -1,0 +1,9 @@
+.container {
+    max-width: 282px;
+    max-height: 361px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px 10px 0px 0px;
+    object-fit: cover;
+}
