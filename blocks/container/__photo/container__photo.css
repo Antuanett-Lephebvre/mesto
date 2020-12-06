@@ -1,7 +1,0 @@
-.container__photo {
-    display: flex;
-    flex-shrink: 0;
-    object-fit: contain;
-    max-width: 282px;
-    border-radius: 10px 10px 0px 0px;
-}

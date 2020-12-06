@@ -1,39 +1,32 @@
-const editButtonNode = document.querySelector('.button_edit');
+const editButtonNode = document.querySelector('.button_type_edit');
 const popupNode = document.querySelector('.popup');
-const closeButtonNode = document.querySelector('.button_closed');
-const infoTitleNode = document.querySelector('.info__title');
-const infoSubtitleNode = document.querySelector('.info__subtitle');
+const closeButtonNode = document.querySelector('.button_type_closed');
+const infoTitleNode = document.querySelector('.profile__title');
+const infoSubtitleNode = document.querySelector('.profile__subtitle');
 const formNode = document.querySelector('.popup__form');
-const formInputNameNode = document.querySelector('.input-container__area_name');
-const formInputAboutNode = document.querySelector('.input-container__area_about');
+const formInputNameNode = document.querySelector('.popup__area_name');
+const formInputAboutNode = document.querySelector('.popup__area_about');
 
-
-editButtonNode.addEventListener('click', handleEditButtonClick);
 
 function handleEditButtonClick() {
-    popupNode.classList.add('popup_opened');
     formInputNameNode.value = infoTitleNode.textContent;
     formInputAboutNode.value = infoSubtitleNode.textContent;
+    popupNode.classList.add('popup_opened');
 }
-
-closeButtonNode.addEventListener('click', handleAddButtonClick);
 
 function handleAddButtonClick() {
     popupNode.classList.remove('popup_opened');
 }
 
-formNode.addEventListener('submit', handleFormSubmitName);
-
-function handleFormSubmitName(event) {
+function handleFormSubmit(event) {
     event.preventDefault();
     infoTitleNode.textContent = formInputNameNode.value;
-    popupNode.classList.remove('popup_opened');
-}
-
-formNode.addEventListener('submit', handleFormSubmitAbout);
-
-function handleFormSubmitAbout(event) {
-    event.preventDefault();
     infoSubtitleNode.textContent = formInputAboutNode.value;
 }
 
+editButtonNode.addEventListener('click', handleEditButtonClick);
+
+closeButtonNode.addEventListener('click', handleAddButtonClick);
+
+formNode.addEventListener('submit', handleFormSubmit);
+formNode.addEventListener('submit', handleAddButtonClick);
