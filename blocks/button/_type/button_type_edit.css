@@ -6,10 +6,13 @@
     background-image: url('../../../images/pen.svg');
     background-repeat: no-repeat;
     background-clip: border-box;
+    background-position: center center;
 }
 
 @media (max-width: 900px) {
     .button_type_edit{
         margin-top: 10px;
+        width: 18px;
+        height: 18px;
     }
 }
