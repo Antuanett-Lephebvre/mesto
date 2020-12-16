@@ -129,6 +129,8 @@ function createCard (data) {
         const popupImageContainer = document.querySelector('.popup_add_image');
         const popupPic = popupImageContainer.querySelector('.popup__image');
             popupPic.src = data.link
+        let popupText = popupImageContainer.querySelector('.popup__subtitle');
+        popupText.textContent = data.name
             handleEditCardButtonClick(popupImageContainer);
         }
 
