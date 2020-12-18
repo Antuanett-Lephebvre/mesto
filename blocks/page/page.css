@@ -5,6 +5,7 @@
     margin: 45px auto 41px;
     color: #FFFFFF;
     position: relative;
+    width: 100%;
 }
 
 @media (max-width: 900px) {

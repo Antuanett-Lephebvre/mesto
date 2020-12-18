@@ -32,16 +32,6 @@
    </button>
   </div>
  </section>
- <template class="template-container">
-  <article class="card">
-    <img class="card__photo" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="фото пейзаж">
-    <button type="button" class="button button_type_delete opacity" aria-label="удаляет карточку"></button>
-    <div class="card__container">
-     <h2 class="card__title"></h2>
-     <button type="button" class="card__like opacity opacity_like"></button>
-    </div>
-  </article>
- </template>
  <section class="photo-grid">
  </section>
  <footer class="footer">
@@ -82,7 +72,17 @@
    <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Карточка с фотографией">
    <h2 class="popup__subtitle">вабулабудабдаб</h2>
   </div>
- </article>
+</article>
+<template class="template-container">
+  <article class="card">
+    <img class="card__photo opacity_button" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="фото пейзаж">
+    <button type="button" class="button button_type_delete opacity" aria-label="удаляет карточку"></button>
+    <div class="card__container">
+     <h2 class="card__title"></h2>
+     <button type="button" class="card__like opacity opacity_like"></button>
+    </div>
+  </article>
+ </template>
 </main>
 <script src="./index.js"></script>
 
