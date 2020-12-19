@@ -31,6 +31,7 @@ const addButtonNode = document.querySelector('.button_type_add');
 const popupCardNode = document.querySelector('.popup_add_card');
 const closeProfileButtonNode = document.querySelector('.button_closed_profile');
 const closeCardButtonNode = document.querySelector('.button_closed_card');
+const closeImageButtonNode = document.querySelector('.button_closed_image');
 const infoTitleNode = document.querySelector('.profile__title');
 const infoSubtitleNode = document.querySelector('.profile__subtitle');
 const formInputNameNode = document.querySelector('.popup__area_type_name');
@@ -49,14 +50,9 @@ function openPopup(popup) {
     popup.classList.add('overlay');
 }
 
-/*function closePopup(popup) {
-    debugger
+function closePopup(popup) {
     popup.classList.remove('overlay');
-}*/
-
-/*function handleEditCardButtonClick(modal) {
-    modal.classList.add('overlay');
-}*/
+}
 
 function handleEditProfileButtonClick() {
     formInputNameNode.value = infoTitleNode.textContent;
@@ -64,23 +60,12 @@ function handleEditProfileButtonClick() {
     openPopup(popupProfileNode);
 }
 
-function handleAddProfileButtonClick(e) {
-    const closeButtonProfile = e.target;
-    if (closeButtonProfile.classList.contains('button_type_closed')
-    || closeButtonProfile.classList.contains('button_type_submit'))
-    {
-        closePopup(closeButtonProfile);
-        //closeButtonProfile.closest('.popup').classList.remove('overlay');
-
-    }
-}
-
-function handleAddCardButtonClick(e) {
+function definitionPopup(e) {
     const closeButtonCard = e.target;
     if (closeButtonCard.classList.contains('button_type_closed'))
     {
-        closePopup(closeButtonCard);
-        //closeButtonCard.closest('.popup').classList.remove('overlay');
+        const identityPopup = closeButtonCard.closest('.popup');
+        closePopup(identityPopup);
 
     }
 }
@@ -89,7 +74,7 @@ function submitProfileForm(e) {
     e.preventDefault();
     infoTitleNode.textContent = formInputNameNode.value;
     infoSubtitleNode.textContent = formInputAboutNode.value;
-    handleAddCardButtonClick(e);
+    closePopup(popupProfileNode);
 }
 
 function renderList() {
@@ -122,7 +107,8 @@ function createCard (data) {
 function openImagePopup(data){
     const popupPic = popupImageContainer.querySelector('.popup__image');
         popupPic.src = data.link
-    let popupText = popupImageContainer.querySelector('.popup__subtitle');
+
+    const popupText = popupImageContainer.querySelector('.popup__subtitle');
     popupText.textContent = data.name
         openPopup(popupImageContainer);
     }
@@ -130,10 +116,6 @@ function openImagePopup(data){
 
 function onLikeButton(like){
     like.classList.toggle('card__like_active');
-}
-
-function bindAddItemListener(){
-    popupCardForm.addEventListener('submit', addNewItems);
 }
 
 function removeItem(e){
@@ -145,7 +127,7 @@ function removeItem(e){
 function addNewItems(e) {
     e.preventDefault();
     const inputName = formInputNameCardNode.value;
-    const inputLink = formInputLinkNode.value
+    const inputLink = formInputLinkNode.value;
     const objectData = {
         name: inputName,
         link: inputLink
@@ -153,18 +135,23 @@ function addNewItems(e) {
     const newItemHTML = createCard(objectData);
 
     gridContainerElement.prepend(newItemHTML);
-    //closePopup(popupCardNode);
-    //popupCardNode.classList.remove('overlay');
+
+    closePopup(popupCardNode);
 }
+
+closeProfileButtonNode.addEventListener('click', function(){
+    closePopup(popupProfileNode)
+})
+
+closeCardButtonNode.addEventListener('click', function(){
+    closePopup(popupCardNode)
+})
+
+closeImageButtonNode.addEventListener('click', function(){
+    closePopup(popupImageContainer)
+})
 
 popupProfileNode.addEventListener('submit', submitProfileForm);
-/*formNode.addEventListener('submit', function(){
-    handleEditProfileButtonClick(popupNode);
-}); */
-
-function closePopup(button) {
-    button.closest('.popup').classList.remove('overlay');
-}
 
 addButtonNode.addEventListener('click', function(){
     openPopup(popupCardNode);
@@ -174,8 +161,6 @@ editButtonNode.addEventListener('click', function(popupProfileNode){
     handleEditProfileButtonClick(popupProfileNode);
 });
 
-root.addEventListener('click', handleAddProfileButtonClick)
+popupCardForm.addEventListener('submit', addNewItems);
 
-bindAddItemListener();
 renderList();
- 
