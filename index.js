@@ -25,26 +25,30 @@ const initialCards = [
     }
 ];
 
-const editButtonNode = document.querySelector('.button_type_edit');
-const popupProfileNode = document.querySelector('.popup_add_profile');
-const addButtonNode = document.querySelector('.button_type_add');
-const popupCardNode = document.querySelector('.popup_add_card');
-const closeProfileButtonNode = document.querySelector('.button_closed_profile');
-const closeCardButtonNode = document.querySelector('.button_closed_card');
-const closeImageButtonNode = document.querySelector('.button_closed_image');
-const infoTitleNode = document.querySelector('.profile__title');
-const infoSubtitleNode = document.querySelector('.profile__subtitle');
-const formInputNameNode = document.querySelector('.popup__area_type_name');
-const formInputAboutNode = document.querySelector('.popup__area_type_about');
-const formInputNameCardNode = document.querySelector('.popup__area_type_name-card');
-const formInputLinkNode = document.querySelector('.popup__area_type_link');
-const popupCardForm = document.querySelector('.popup__form_card');
-const root = document.querySelector('.root');
-const templateElement = document.querySelector('.template-container');
-const gridContainerElement = document.querySelector('.photo-grid');
-const cardElement = document.querySelector('.card');
-const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
-const popupImageContainer = document.querySelector('.popup_add_image');
+
+    //const profilePopupArea = document.querySelector('.popup_add_profile');
+    const editButtonNode = document.querySelector('.button_type_edit');
+    const popupProfileNode = document.querySelector('.popup_add_profile');
+    const addButtonNode = document.querySelector('.button_type_add');
+    const popupCardNode = document.querySelector('.popup_add_card');
+    const closeProfileButtonNode = document.querySelector('.button_closed_profile');
+    const closeCardButtonNode = document.querySelector('.button_closed_card');
+    const closeImageButtonNode = document.querySelector('.button_closed_image');
+    const infoTitleNode = document.querySelector('.profile__title');
+    const infoSubtitleNode = document.querySelector('.profile__subtitle');
+    const formInputNameNode = document.querySelector('.popup__area_type_name');
+    const formInputAboutNode = document.querySelector('.popup__area_type_about');
+    const formInputNameCardNode = document.querySelector('.popup__area_type_name-card');
+    const formInputLinkNode = document.querySelector('.popup__area_type_link');
+    const popupCardForm = document.querySelector('.popup__form_card');
+    const popupAccountForm = document.querySelector('.popup__form_account');
+    const root = document.querySelector('.root');
+    const templateElement = document.querySelector('.template-container');
+    const gridContainerElement = document.querySelector('.photo-grid');
+    const cardElement = document.querySelector('.card');
+    const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
+    const popupImageContainer = document.querySelector('.popup_add_image');
+
 
 function openPopup(popup) {
     popup.classList.add('overlay');
@@ -58,16 +62,6 @@ function handleEditProfileButtonClick() {
     formInputNameNode.value = infoTitleNode.textContent;
     formInputAboutNode.value = infoSubtitleNode.textContent;
     openPopup(popupProfileNode);
-}
-
-function definitionPopup(e) {
-    const closeButtonCard = e.target;
-    if (closeButtonCard.classList.contains('button_type_closed'))
-    {
-        const identityPopup = closeButtonCard.closest('.popup');
-        closePopup(identityPopup);
-
-    }
 }
 
 function submitProfileForm(e) {
@@ -136,7 +130,7 @@ function addNewItems(e) {
 
     gridContainerElement.prepend(newItemHTML);
 
-    closePopup(popupCardNode);
+    closePopup(popupCardNode); 
 }
 
 closeProfileButtonNode.addEventListener('click', function(){
@@ -151,9 +145,8 @@ closeImageButtonNode.addEventListener('click', function(){
     closePopup(popupImageContainer)
 })
 
-popupProfileNode.addEventListener('submit', submitProfileForm);
-
 addButtonNode.addEventListener('click', function(){
+    popupCardForm.reset();
     openPopup(popupCardNode);
 });
 
@@ -162,5 +155,32 @@ editButtonNode.addEventListener('click', function(popupProfileNode){
 });
 
 popupCardForm.addEventListener('submit', addNewItems);
+
+popupAccountForm.addEventListener('submit', submitProfileForm);
+
+popupProfileNode.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+        closePopup(popupProfileNode);
+    }
+})
+
+popupCardNode.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+        closePopup(popupCardNode);
+    }
+})
+
+popupImageContainer.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+        closePopup(popupImageContainer);
+    }
+})
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+            const popupVisible = document.querySelector('.overlay');
+            closePopup(popupVisible);
+        };
+})
 
 renderList();

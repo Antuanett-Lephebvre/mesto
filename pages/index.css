@@ -44,4 +44,6 @@
 @import url("../blocks/popup/_add/popup_add_profile.css");
 @import url("../blocks/overlay/overlay.css");
 @import url("../blocks/card/__like/_active/card__like_active.css");
-
+@import url("../blocks/popup/__error/popup__error.css");
+@import url("../blocks/popup/__area/_state/popup__area_state_invalid.css");
+@import url("../blocks/button/_type/_invalid/button_type_invalid.css");
