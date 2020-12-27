@@ -2,8 +2,8 @@ const validationConfig = {
     formSelector: '.popup__form',
     savedButtonNode: '.button_type_saved',
     inputSelector: '.popup__area',
-    buttonInvalidClass: '.button_type_invalid',
-    inputInvalidClass: '.popup__area_state_invalid',
+    buttonInvalidClass: 'button_type_invalid',
+    inputInvalidClass: 'popup__area_state_invalid',
 }
 
 
@@ -62,5 +62,4 @@ function enableValidation(config){
         setButtonState(submitButton, form.checkValidity(), config)
     });
 }
-
 enableValidation(validationConfig);
