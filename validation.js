@@ -1,3 +1,6 @@
+const popupCardForm = document.querySelector('.popup__form_card');
+const popupCardNode = document.querySelector('.popup_add_card');
+const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
 const validationConfig = {
     formSelector: '.popup__form',
     savedButtonNode: '.button_type_saved',
@@ -37,6 +40,24 @@ function setButtonState(button, isActive, config) {
     }
 }
 
+function addNewItems(e, config) {
+    e.preventDefault();
+    const inputName = formInputNameCardNode.value;
+    const inputLink = formInputLinkNode.value;
+    const objectData = {
+        name: inputName,
+        link: inputLink
+    }
+    const newItemHTML = createCard(objectData);
+
+    gridContainerElement.prepend(newItemHTML);
+    popupCardForm.reset();
+
+    setButtonState(savedButtonNode, popupCardForm.checkValidity(), config)
+
+    closePopup(popupCardNode); 
+}
+
 function setEventListener(form, config) {
     const inputList = form.querySelectorAll(config.inputSelector);
     const submitButton = form.querySelector(config.savedButtonNode);
@@ -59,7 +80,18 @@ function enableValidation(config){
         });
 
         const submitButton = form.querySelector(config.savedButtonNode);
-        setButtonState(submitButton, form.checkValidity(), config)
+        setButtonState(submitButton, form.checkValidity(), config);
     });
 }
+
+function resertConfig(e, config) {
+    addNewItems(e, config);
+    setButtonState(savedButtonNode, popupCardForm.checkValidity(), config);
+    }
+
+
 enableValidation(validationConfig);
+
+popupCardForm.addEventListener('submit', function(e) {
+    resertConfig(e, validationConfig);
+});

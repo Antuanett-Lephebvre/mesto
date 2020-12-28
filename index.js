@@ -1,3 +1,4 @@
+//Исправление последней ошибки стоило мне большой боли
 const initialCards = [
     {
         name: 'Архыз',
@@ -26,11 +27,10 @@ const initialCards = [
 ];
 
 
-    //const profilePopupArea = document.querySelector('.popup_add_profile');
     const editButtonNode = document.querySelector('.button_type_edit');
     const popupProfileNode = document.querySelector('.popup_add_profile');
     const addButtonNode = document.querySelector('.button_type_add');
-    const popupCardNode = document.querySelector('.popup_add_card');
+    //const popupCardNode = document.querySelector('.popup_add_card');
     const closeProfileButtonNode = document.querySelector('.button_closed_profile');
     const closeCardButtonNode = document.querySelector('.button_closed_card');
     const closeImageButtonNode = document.querySelector('.button_closed_image');
@@ -40,13 +40,13 @@ const initialCards = [
     const formInputAboutNode = document.querySelector('.popup__area_type_about');
     const formInputNameCardNode = document.querySelector('.popup__area_type_name-card');
     const formInputLinkNode = document.querySelector('.popup__area_type_link');
-    const popupCardForm = document.querySelector('.popup__form_card');
+    //const popupCardForm = document.querySelector('.popup__form_card');
     const popupAccountForm = document.querySelector('.popup__form_account');
     const root = document.querySelector('.root');
     const templateElement = document.querySelector('.template-container');
     const gridContainerElement = document.querySelector('.photo-grid');
     const cardElement = document.querySelector('.card');
-    const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
+    //const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
     const popupImageContainer = document.querySelector('.popup_add_image');
 
 
@@ -123,25 +123,6 @@ function onLikeButton(like){
 
 function removeItem(e){
     e.target.closest('.card').remove();
-    /*const targetElement = e.target;
-    const targetItem = targetElement.closest('.card');
-    targetItem.remove();*/
-}
-
-function addNewItems(e) {
-    //setEventListener(popupCardForm)
-    e.preventDefault();
-    const inputName = formInputNameCardNode.value;
-    const inputLink = formInputLinkNode.value;
-    const objectData = {
-        name: inputName,
-        link: inputLink
-    }
-    const newItemHTML = createCard(objectData);
-
-    gridContainerElement.prepend(newItemHTML);
-
-    closePopup(popupCardNode); 
 }
 
 closeProfileButtonNode.addEventListener('click', function(){
@@ -165,8 +146,6 @@ editButtonNode.addEventListener('click', function(popupProfileNode){
     handleEditProfileButtonClick(popupProfileNode);
 });
 
-popupCardForm.addEventListener('submit', addNewItems);
-
 popupAccountForm.addEventListener('submit', submitProfileForm);
 
 popupProfileNode.addEventListener('click', (evt) => {
@@ -186,12 +165,5 @@ popupImageContainer.addEventListener('click', (evt) => {
         closePopup(popupImageContainer);
     }
 })
-
-/*document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-            const popupVisible = document.querySelector('.overlay');
-            closePopup(popupVisible);
-        };
-})*/
 
 renderList();
