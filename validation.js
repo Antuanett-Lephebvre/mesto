@@ -84,10 +84,10 @@ function enableValidation(config){
     });
 }
 
-function resertConfig(e, config) {
+/*function resertConfig(e, config) {
     addNewItems(e, config);
     setButtonState(savedButtonNode, popupCardForm.checkValidity(), config);
-    }
+    }*/
 
 
 enableValidation(validationConfig);

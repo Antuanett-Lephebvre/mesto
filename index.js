@@ -80,7 +80,7 @@ function addNewItems(e) {
     gridContainerElement.prepend(newItemHTML);
     popupCardForm.reset();
 
-    setButtonState(savedButtonNode, popupCardForm.checkValidity(), invalidClass);
+    setButtonState(savedButtonNode, popupCardForm.checkValidity(), validationConfig);
 
     closePopup(popupCardNode); 
 }
@@ -184,8 +184,9 @@ popupImageContainer.addEventListener('click', (evt) => {
     }
 })
 
-popupCardForm.addEventListener('submit', function(e) {
-    resertConfig(e, validationConfig);
-});
+popupCardForm.addEventListener('submit', function(e){
+    //setButtonState(savedButtonNode, false, invalidClass);
+    addNewItems(e);
+})
 
 renderList();
