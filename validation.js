@@ -1,6 +1,6 @@
-const popupCardForm = document.querySelector('.popup__form_card');
+/*const popupCardForm = document.querySelector('.popup__form_card');
 const popupCardNode = document.querySelector('.popup_add_card');
-const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
+const savedButtonNode = popupCardNode.querySelector('.button_type_saved');*/
 const validationConfig = {
     formSelector: '.popup__form',
     savedButtonNode: '.button_type_saved',
@@ -40,7 +40,7 @@ function setButtonState(button, isActive, config) {
     }
 }
 
-function addNewItems(e, config) {
+/*function addNewItems(e, config) {
     e.preventDefault();
     const inputName = formInputNameCardNode.value;
     const inputLink = formInputLinkNode.value;
@@ -56,7 +56,7 @@ function addNewItems(e, config) {
     setButtonState(savedButtonNode, popupCardForm.checkValidity(), config)
 
     closePopup(popupCardNode); 
-}
+}*/
 
 function setEventListener(form, config) {
     const inputList = form.querySelectorAll(config.inputSelector);
@@ -91,7 +91,3 @@ function resertConfig(e, config) {
 
 
 enableValidation(validationConfig);
-
-popupCardForm.addEventListener('submit', function(e) {
-    resertConfig(e, validationConfig);
-});
