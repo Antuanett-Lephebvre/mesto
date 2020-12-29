@@ -185,7 +185,6 @@ popupImageContainer.addEventListener('click', (evt) => {
 })
 
 popupCardForm.addEventListener('submit', function(e){
-    //setButtonState(savedButtonNode, false, invalidClass);
     addNewItems(e);
 })
 
