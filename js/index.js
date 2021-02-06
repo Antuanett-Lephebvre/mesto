@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-import  Validation from "./FormValidation.js";
+import  FormValidation from "./FormValidation.js";
 
 const initialCards = [
     {
@@ -29,14 +29,10 @@ const initialCards = [
 ];
 const gridContainerElement = document.querySelector('.photo-grid');
 
-
-
 initialCards.forEach(function (initialCard) {
-    const card = new Card(initialCard, ".template-container").renderCard();
+    const card = new Card(initialCard, ".template-container").renderCard(); 
     gridContainerElement.append(card);
 })
-
-
 
 
     const editButtonNode = document.querySelector('.button_type_edit');
@@ -67,9 +63,9 @@ initialCards.forEach(function (initialCard) {
         inputInvalidClass: 'popup__area_state_invalid',
     }
 
-    const validationFormAdd = new Validation(validationConfig, ".popup__form_card");
+    const validationFormAdd = new FormValidation(validationConfig, ".popup__form_card");
     validationFormAdd.enableValidation();
-    const validationFormEdit = new Validation(validationConfig, ".popup__form_account");
+    const validationFormEdit = new FormValidation(validationConfig, ".popup__form_account");
     validationFormEdit.enableValidation();
 
 export function openPopup(popup) {
@@ -77,11 +73,10 @@ export function openPopup(popup) {
     document.addEventListener('keydown', closePopupByEsc);
 }
 
-export function closePopup(popup) {
+function closePopup(popup) {
     popup.classList.remove('overlay');
     document.removeEventListener('keydown', closePopupByEsc);
-    validationFormAdd.cleanError();
-    validationFormEdit.cleanError();
+
 }
 
 function closePopupByEsc(e) {
@@ -94,6 +89,7 @@ function closePopupByEsc(e) {
 function handleEditProfileButtonClick() {
     formInputNameNode.value = infoTitleNode.textContent;
     formInputAboutNode.value = infoSubtitleNode.textContent;
+    validationFormEdit.cleanError();
     openPopup(popupProfileNode);
 }
 
@@ -113,14 +109,20 @@ export function openImagePopup(data){
         openPopup(popupImageContainer);
     }
 
+   function addNewItems(e) {
+        const inputName = formInputNameCardNode.value;
+        const inputLink = formInputLinkNode.value;
+        const cardData = {
+            name: inputName,
+            link: inputLink
+        }
 
-export function onLikeButton(like){
-    like.classList.toggle('card__like_active');
-}
+        const massCard = new Card (cardData, ".template-container").renderCard();
+        gridContainerElement.prepend(massCard);
+        popupCardForm.reset();
+        
+    }
 
-function removeItem(e){
-    e.target.closest('.card').remove();
-}
 
 closeProfileButtonNode.addEventListener('click', function(){
     closePopup(popupProfileNode)
@@ -137,6 +139,7 @@ closeImageButtonNode.addEventListener('click', function(){
 addButtonNode.addEventListener('click', function(){
     popupCardForm.reset();
     validationFormAdd.setButtonState(popupCardForm.checkValidity());
+    validationFormAdd.cleanError();
     openPopup(popupCardNode);
 });
 
@@ -164,12 +167,7 @@ popupImageContainer.addEventListener('click', (evt) => {
     }
 })
 
-popupCardForm.addEventListener('submit', function(e){ 
-    const newCard = new Card(initialCards, ".template-container")
-    newCard.addNewItems(e)})
-
-
-
-//renderList();
-
-
+popupCardForm.addEventListener('submit', function(e){
+    closePopup(popupCardNode);
+    addNewItems(e);
+});

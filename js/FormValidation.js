@@ -1,9 +1,9 @@
-export default class Validation{
+export default class FormValidation{
     constructor(configValidation, formSelector){
         this._config = configValidation;
         this._formEl = document.querySelector(formSelector);
         this._buttonSubmit = this._formEl.querySelector(this._config.savedButtonNode);
-        this._inputs = this._formEl.querySelectorAll(".popup__area")
+        this._inputs = this._formEl.querySelectorAll(this._config.inputSelector);
     };
     
     _showError(input){
@@ -14,7 +14,7 @@ export default class Validation{
     
     _hideError(input){
         const error = this._formEl.querySelector(`#${input.id}-error`);
-        error.textContent = '';
+     error.textContent = '';
         input.classList.remove(this._config.inputInvalidClass);
     }
 
@@ -39,7 +39,6 @@ export default class Validation{
     setEventListener() {
             this._formEl.addEventListener('input', (evt) => {
             const input = evt.target;
-            this._input = input;
               this._checkInputValidity(input);
               this.setButtonState(this._formEl.checkValidity());
          })

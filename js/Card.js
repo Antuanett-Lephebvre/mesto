@@ -1,8 +1,4 @@
-import  Validation from "./FormValidation.js";
-import {openPopup} from "./index.js";
-import {closePopup} from "./index.js";
 import {openImagePopup} from "./index.js";
-import {onLikeButton} from "./index.js";
 
 
 export default class Card {
@@ -10,13 +6,6 @@ export default class Card {
         this._initialCard = initialCard;
         this._templateSelector = templateSelector;
         this._card = null;
-        this.popupCardForm = document.querySelector('.popup__form_card');
-        this.formInputNameCardNode = document.querySelector('.popup__area_type_name-card');
-        this.formInputLinkNode = document.querySelector('.popup__area_type_link');
-        this.templateElement = document.querySelector('.template-container');
-        this.gridContainerElement = document.querySelector('.photo-grid');
-        this.popupCardNode = document.querySelector('.popup_add_card');
-        this.popupImageContainer = document.querySelector('.popup_add_image');
     }
     _getTemplate() {
         const cardElement = document
@@ -40,60 +29,24 @@ export default class Card {
             link: inputL
         }
 
-        return this.createCard(Data);
+        const removeButton = this._card.querySelector('.button_type_delete');
+        removeButton.addEventListener('click', this._removeItem);
+    
+            const cardPhoto = this._card.querySelector('.card__photo');
+            cardPhoto.addEventListener('click', function(){
+                openImagePopup(Data);
+            });
+    
+            const likeButton = this._card.querySelector('.card__like');
+            likeButton.addEventListener('click', function(e) {
+                e.currentTarget.classList.toggle('card__like_active');
+            });
+
 
         return this._card;
       }
-
-        addNewItems(e) {
-            e.preventDefault();
-            const inputName = this.formInputNameCardNode.value;
-            const inputLink = this.formInputLinkNode.value;
-            const objectData = {
-                name: inputName,
-                link: inputLink
-            }
-
-            const newItemHTML = this.createCard(objectData);
-
-            this.gridContainerElement.prepend(newItemHTML);
-            this.popupCardForm.reset();
-
-            this.savedButtonNode = this.popupCardNode.querySelector('.button_type_saved');
-            
-
-            closePopup(this.popupCardNode); 
-        }
-
-        onLikeButton(like){
-            like.classList.toggle('card__like_active');
-        }
         
-        removeItem(e){
+        _removeItem(e){
             e.target.closest('.card').remove();
-        }
-        
-        createCard (data) {
-            const newItem = this.templateElement.content.cloneNode(true);
-            const photoElement = newItem.querySelector('.card__photo');
-            photoElement.src = data.link;
-            const titleElement = newItem.querySelector('.card__title');
-            titleElement.textContent = data.name;
-        
-        
-            const removeButton = newItem.querySelector('.button_type_delete');
-            removeButton.addEventListener('click', this.removeItem);
-        
-            const likeButton = newItem.querySelector('.card__like');
-        
-            likeButton.addEventListener('click', function(e) {
-
-                onLikeButton(e.currentTarget);
-            });
-
-            photoElement.addEventListener('click', function(){
-                openImagePopup(data);
-            });
-                return newItem;
         }
 }
