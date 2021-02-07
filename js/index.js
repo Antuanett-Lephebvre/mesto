@@ -29,10 +29,16 @@ const initialCards = [
 ];
 const gridContainerElement = document.querySelector('.photo-grid');
 
-initialCards.forEach(function (initialCard) {
-    const card = new Card(initialCard, ".template-container").renderCard(); 
-    gridContainerElement.append(card);
+initialCards.forEach(function (initialCard){
+    createCard(initialCard);
+    const letCard = createCard(initialCard);
+    gridContainerElement.append(letCard);
 })
+function createCard(item) {
+    const cardInstance = new Card(item, '.template-container');
+    const card = cardInstance.generateCard();
+    return card;
+}
 
 
     const editButtonNode = document.querySelector('.button_type_edit');
@@ -52,9 +58,11 @@ initialCards.forEach(function (initialCard) {
     const popupAccountForm = document.querySelector('.popup__form_account');
     const root = document.querySelector('.root');
     const templateElement = document.querySelector('.template-container');
+    const popupImageContainer = document.querySelector('.popup_add_image');
+    const popupPic = popupImageContainer.querySelector('.popup__image');
+    const popupText = popupImageContainer.querySelector('.popup__subtitle');
     
     const savedButtonNode = popupCardNode.querySelector('.button_type_saved');
-    const popupImageContainer = document.querySelector('.popup_add_image');
 
     const validationConfig = {
         savedButtonNode: '.button_type_saved',
@@ -101,25 +109,25 @@ function submitProfileForm(e) {
 }
 
 export function openImagePopup(data){
-    const popupPic = popupImageContainer.querySelector('.popup__image');
         popupPic.src = data.link
-
-    const popupText = popupImageContainer.querySelector('.popup__subtitle');
-    popupText.textContent = data.name
+        popupText.textContent = data.name
         openPopup(popupImageContainer);
     }
 
-   function addNewItems(e) {
+   function addNewItems() {
         const inputName = formInputNameCardNode.value;
         const inputLink = formInputLinkNode.value;
+
         const cardData = {
             name: inputName,
             link: inputLink
         }
 
-        const massCard = new Card (cardData, ".template-container").renderCard();
-        gridContainerElement.prepend(massCard);
+        createCard(cardData);
         popupCardForm.reset();
+
+        const newCard = createCard(cardData);
+    gridContainerElement.prepend(newCard);
         
     }
 
@@ -150,24 +158,24 @@ editButtonNode.addEventListener('click', function(popupProfileNode){
 popupAccountForm.addEventListener('submit', submitProfileForm);
 
 popupProfileNode.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('button_type_closed')) {
         closePopup(popupProfileNode);
     }
 })
 
 popupCardNode.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('button_type_closed')) {
         closePopup(popupCardNode);
     }
 })
 
 popupImageContainer.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('overlay') || evt.target.classList.contains('button_type_closed')) {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('button_type_closed')) {
         closePopup(popupImageContainer);
     }
 })
 
-popupCardForm.addEventListener('submit', function(e){
+popupCardForm.addEventListener('submit', function(){
     closePopup(popupCardNode);
-    addNewItems(e);
+    addNewItems();
 });
