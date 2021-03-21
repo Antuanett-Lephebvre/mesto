@@ -47,64 +47,64 @@ const validationConfig = {
     inputInvalidClass: 'popup__area_state_invalid',
 }
 
-    const userClass = new UserInfo(infoTitleNode, infoSubtitleNode);
-    
-    userClass.setUserInfo(infoTitleNode.textContent, infoSubtitleNode.textContent);
-
     const validationFormAdd = new FormValidation(validationConfig, ".popup__form_card");
     validationFormAdd.enableValidation();
     const validationFormEdit = new FormValidation(validationConfig, ".popup__form_account");
     validationFormEdit.enableValidation();
 
+    const userClass = new UserInfo('.profile__title', '.profile__subtitle');
+    //const userClass = new UserInfo(infoTitleNode, infoSubtitleNode);
+    
+    //userClass.setUserInfo(infoTitleNode.textContent, infoSubtitleNode.textContent);
 
-const createClassCard = function (item, element) {
+
+const createClassCard = function (item) {
     return new Card ({
         data: item, 
-        element: element,
         handleCardClick: function forHandleCardClick () {
-            handleCardClick(item)},
-        addItem: (element) => {
-            newCards.addItem(element);
-        }
-
+            imagePopup.open(item)},
     }, '.template-container').generateCard();
 }
 //инициализация класса попапа для изменения данных пользователя
 const profileEditPopup = new PopupWithForm({
     popupSelector: '.popup_add_profile',
     handleFormSubmit: (data) => {
-        userClass.updateUserInfo(data);
+        userClass.setUserInfo(data);
+        //userClass.updateUserInfo(data);
     }
 });
 
 profileEditPopup.setEventListeners();
 
-function handleCardClick (item)  {
-    const imagePopup = new PopupWithImage(item, ".popup_add_image");
-        imagePopup.open();
-}
+const imagePopup = new PopupWithImage(".popup_add_image");
 
 
     const cardAddPopup = new PopupWithForm({
         popupSelector: '.popup_add_card',
         handleFormSubmit: (item) => {
+            //console.log(item);
             const card = createClassCard(item);
+            newCards.prependItem(card);
         }
     })
 
    
     const newCards = new Section({
         items: initialCards,
-        renderer: (item, element) => {
-            const card = createClassCard(item, element);
+        renderer: (item) => {
+            const card = createClassCard(item);
+            newCards.appendItem(card);
     }
 }, gridContainerElement)
     newCards.renderItems();
 
+        cardAddPopup.setEventListeners();
+
     editButtonNode.addEventListener('click', () => {
         validationFormEdit.cleanError();
+        userClass.getUserInfo();
         profileEditPopup.open();
-        profileEditPopup.setEventListeners();
+        //profileEditPopup.setEventListeners();
     });
 
     addButtonNode.addEventListener('click', function(){
@@ -112,5 +112,4 @@ function handleCardClick (item)  {
         validationFormAdd.setButtonState(popupCardForm.checkValidity());
         validationFormAdd.cleanError();
         cardAddPopup.open();
-        cardAddPopup.setEventListeners();
     });

@@ -1,18 +1,17 @@
 export default class Card {
-    constructor ({data, element, handleCardClick, addItem}, template) {
-        this._element = element;
+    constructor ({data,  handleCardClick}, template) {
         this._element = "";
         this._link = data.link;
         this._name = data.name;
         this._handleCardClick = handleCardClick;
         this._template = template;
-        this._addItem = addItem;
+
     }
     
     _getTemplate() {
         const cardElement = document.querySelector(this._template).content.querySelector(
         '.card').cloneNode(true);
-        this._addItem(cardElement); 
+        //this._addItem(cardElement); 
         this._cardElement = cardElement;
         return cardElement;
     }
@@ -51,5 +50,6 @@ export default class Card {
         image.src = this._link;
         this._element.querySelector('.card__title').textContent = this._name;
         this._setEventListeners();
+        return this._element;
     }
 }
