@@ -1,20 +1,21 @@
-export default class UserInfo {
-    constructor (name, about) {
-        this._existName = name;
-        this._existAbout = about
-        this._formInputNameNode = document.querySelector('.popup__area_type_name');
-        this._formInputAboutNode = document.querySelector('.popup__area_type_about');
-        this._nameValue = document.querySelector(this._existName),
-        this._aboutValue = document.querySelector(this._existAbout);
-    }
+export default class UserInfo { 
+    constructor (name, about) { 
+        this._existName = name; 
+        this._existAbout = about 
+        this._nameValue = document.querySelector(this._existName), 
+        this._aboutValue = document.querySelector(this._existAbout); 
+    } 
+ 
+    getUserInfo() { 
+        return {
+            userName: this._nameValue.textContent,
+            userDescription: this._aboutValue.textContent
+        }
+    } 
+ 
 
-    getUserInfo() {
-        this._formInputNameNode.value = this._nameValue.textContent;
-        this._formInputAboutNode.value = this._aboutValue.textContent;
-    }
-
-    setUserInfo() {
-       this._nameValue.textContent = this._formInputNameNode.value;
-       this._aboutValue.textContent = this._formInputAboutNode.value;
-    }
-}
+    setUserInfo(data) { 
+       this._nameValue.textContent = data.name; 
+       this._aboutValue.textContent = data.about; 
+    } 
+} 
