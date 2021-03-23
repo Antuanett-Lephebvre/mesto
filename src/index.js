@@ -72,8 +72,8 @@ const profileEditPopup = new PopupWithForm({
 profileEditPopup.setEventListeners();
  
 const imagePopup = new PopupWithImage(".popup_add_image"); 
- 
- 
+imagePopup.setEventListeners();
+
     const cardAddPopup = new PopupWithForm({ 
         popupSelector: '.popup_add_card', 
         handleFormSubmit: (item) => { 
