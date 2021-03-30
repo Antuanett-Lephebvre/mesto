@@ -5,7 +5,6 @@ export default class Popup{
         this._handleEscClose = this._handleEscClose.bind(this); 
     } 
     open () {
-        //this._setEventListeners();
         this._popup.classList.add('overlay'); 
         document.addEventListener('keydown', this._handleEscClose); 
     } 

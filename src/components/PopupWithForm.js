@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup {
         this._closeProfileButtonNode = document.querySelector('.button_closed_profile'); 
     } 
  
-   _getInputValues() { 
+   _getInputValues() {
         this._inputList = this._popup.querySelectorAll('.popup__area'); 
  
         this._formValues = {}; 
@@ -25,7 +25,6 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit', () => { 
         this._getInputValues(); 
         this._handleFormSubmit (this._formValues);
-        this.close();
         }); 
     } 
 

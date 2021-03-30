@@ -1,21 +1,53 @@
 export default class UserInfo { 
-    constructor (name, about) { 
-        this._existName = name; 
-        this._existAbout = about 
-        this._nameValue = document.querySelector(this._existName), 
-        this._aboutValue = document.querySelector(this._existAbout); 
-    } 
+    constructor (name, about, avatar) { 
+        this._nameValue = document.querySelector(name), 
+        this._aboutValue = document.querySelector(about); 
+        this._avatarValue = document.querySelector(avatar);
+        this._name = "";
+        this._about = "";
+        this._avatar = "";
+        this._id = "";
+    }
+
+    updateUserInfo() {
+        this._nameValue.textContent = this._name,
+        this._aboutValue.textContent = this._about;
+        this._avatarValue.style.backgroundImage = `url(${this._avatar})`;
+    }
  
     getUserInfo() { 
         return {
-            userName: this._nameValue.textContent,
-            userDescription: this._aboutValue.textContent
+            userName: this._name,
+            userDescription: this._about,
+            userAvatar: this._userAvatar,
         }
     } 
- 
 
-    setUserInfo(data) { 
-       this._nameValue.textContent = data.name; 
-       this._aboutValue.textContent = data.about; 
-    } 
+    getMyId() {
+        return this._id
+    }
+
+    editPhoto(data) {
+        this._avatarValue.style.backgroundImage = `url(${data.avatar})`;
+    }
+
+    loadingFunction (bull, selector) {
+        let SubmitButton = document
+        .querySelector(selector)
+        .querySelector('.button_type_saved')
+        if (bull === false) {
+                SubmitButton.textContent = "Сохранение..."
+        } else {
+                SubmitButton.textContent = "Сохранить"
+        }
+    }
+
+    setUserInfo({name, about, avatar, _id}) {
+        this._name = name;
+        this._about = about;
+        this._avatar = avatar;
+        this._id = _id;
+       this._nameValue.textContent = this._name; 
+       this._aboutValue.textContent = this._about;
+    }
 } 

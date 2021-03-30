@@ -5,7 +5,7 @@ export default class PopupWithImage extends Popup {
         super(popupSelector); 
     } 
  
-    open (Data) { 
+    open (Data) {
         this.Data = Data; 
         this._popupPic = document.querySelector('.popup__image'); 
         this._popupText = document.querySelector('.popup__subtitle'); 

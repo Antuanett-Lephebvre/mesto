@@ -16,11 +16,11 @@
 <main class="root">
  <section class="profile">
   <div class="profile__container">
-   <img class="profile__photo" src="<%=require('../images/photo.jpg')%>" alt="Фото профиля">
+    <button class="profile__photo" alt="Аватар"></button>
    <div class="profile__information">
     <div class="profile__info">
-     <h1 class="profile__title">Жак-Ив Кусто</h1>
-     <p class="profile__subtitle">Исследователь океана</p>
+     <h1 class="profile__title"></h1>
+     <p class="profile__subtitle"></p>
     </div>
     <button type="button" class="button button_type_edit opacity" aria-label="открывает форму редактирования">
     </button>
@@ -88,6 +88,35 @@
    </form>
   </div>
  </article>
+ <article class="popup popup_add_avatar">
+  <div class="popup__container">
+   <button type="button" class="button button_type_closed button_closed_card opacity" aria-label="закрывает форму">
+   </button>
+   <form class="popup__form popup__form_avatar" name="editAvatar" novalidate>
+    <h2 class="popup__title">Обновить аватар</h2>
+    <fieldset class="popup__input-container">
+     <input class="popup__area popup__area_type_avatar"
+     type="url" name="link"
+     id="link"
+     required>
+     <span id="link-error" class="popup__error"></span>
+     <button type="submit" class="button button_type_saved opacity opacity_button" aria-label="добавлят карточку">Создать</button>
+    </fieldset>
+   </form>
+  </div>
+ </article>
+ <article class="popup popup_add_confirm">
+  <div class="popup__container">
+   <button type="button" class="button button_type_closed button_closed_card opacity" aria-label="закрывает форму">
+   </button>
+   <form class="popup__form popup__form_confim" name="addCard" novalidate>
+    <h2 class="popup__title">Вы уверены?</h2>
+    <fieldset class="popup__input-container"></fieldset>
+    <button type="submit" class="button button_type_saved opacity opacity_button" aria-label="добавлят карточку">Да</button>
+    </fieldset>
+   </form>
+  </div>
+ </article>
  <article class="popup popup_add_image">
   <div class="popup__container popup__container_popup-image">
    <button type="button" class="button button_type_closed button_closed_image opacity" aria-label="закрывает форму">
@@ -102,12 +131,15 @@
     <button type="button" class="button button_type_delete opacity" aria-label="удаляет карточку"></button>
     <div class="card__container">
      <h2 class="card__title"></h2>
-     <button type="button" class="card__like opacity opacity_like"></button>
+     <div class="like-container">
+      <button type="button" class="like-container__like opacity opacity_like"></button>
+      <h3 class="like-container__number"></h3>
+     </div>
     </div>
   </article>
  </template>
 </main>
-
+<script type="module" src="./components/Api.js"></script>
 </body>
 
 </html>
