@@ -12,8 +12,8 @@ export default class Card {
         this.cardDelete = this.cardDelete.bind(this);
         this._handleDeleteLike = handleDeleteLike;
         this._handleAddLike = handleAddLike;
-        this.addLike = this.addLike.bind(this);
-        this.deleteLike = this.deleteLike.bind(this);
+        //this.addLike = this.addLike.bind(this);
+        //this.deleteLike = this.deleteLike.bind(this);
         this._likeNumber = null;
     } 
      
@@ -26,22 +26,14 @@ export default class Card {
         return cardElement; 
     } 
 
-        _getLike() {
+        getLike(item) {
             this._likeNumber = this._element.querySelector('.like-container__number');
-            this._likesData = this._data.likes
-            this._likeNumber.textContent = this._likesData.length;
-        }
-
-        _editLikeNumber(bull) {
-            if (bull === true) {
-             this._likeNumber.textContent =  parseInt(this._likeNumber.textContent) + 1;
-            } else if (bull === false) {
-            this._likeNumber.textContent = parseInt(this._likeNumber.textContent) - 1;
-            }
+            this._likesData = item;
+            this._likeNumber.textContent = item.length;
         }
 
         _activateLike() {
-            if (this._statusLike(this._likesBull) === true) {
+            if (this._statusLike(this._likesBool) === true) {
                 this._likeElement = this._element.querySelector('.like-container__like')
                 this._likeElement.classList.add('like-container__like_active')
             } else if (this._statusLike === false) {
@@ -53,7 +45,7 @@ export default class Card {
         }
 
         _statusLike() {
-            return (this._likesBull = this._likesData.some((item) => {
+            return (this._likesBool = this._likesData.some((item) => {
                 return (item._id === this._currentId)
             }))
             }
@@ -78,16 +70,12 @@ export default class Card {
             .querySelector('.like-container__like')
             .classList
             .add('like-container__like_active');
-            this._editLikeNumber(true)
-
         }
 
         deleteLike() {
             this._element
             .querySelector('.like-container__like')
             .classList
-            .remove('like-container__like_active');
-            this._editLikeNumber(false)
         }
  
         cardDelete() {
@@ -120,7 +108,7 @@ export default class Card {
         this._element.querySelector('.card__title').textContent = this._name; 
         this._setEventListeners(); 
         this.defineLike(this._element, this._handleAddLike, this._handleDeleteLike, this._data);
-        this._getLike();
+        this.getLike(this._data.likes);
         this._activateLike();
 
         if (this._ownerId != this._currentId) {

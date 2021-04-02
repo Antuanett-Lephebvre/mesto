@@ -1,4 +1,4 @@
-import '../styles/index.css'; 
+import '../src/index.css'; 
 import Card from "./components/Card.js"; 
 import PopupWithForm from "./components/PopupWithForm.js"; 
 import PopupWithImage from "./components/PopupWithImage.js"; 
@@ -73,7 +73,8 @@ const classCard = new Card ({
 
     handleDeleteLike: (data) => {
         api.removeLike(data)
-        .then(() => {
+        .then((item) => {
+            classCard.getLike(item.likes);
             classCard.deleteLike();
         })
         .catch((err) => {
@@ -83,7 +84,8 @@ const classCard = new Card ({
 
     handleAddLike: (data) => {
         api.addLike(data)
-        .then(() => {
+        .then((item) => {
+            classCard.getLike(item.likes);
             classCard.addLike();
         })
         .catch((err) => {
@@ -110,14 +112,15 @@ api.getAllInfo()
 const profileEditPopup = new PopupWithForm({ 
     popupSelector: '.popup_add_profile', 
     handleFormSubmit: (data) => {
-        userClass.loadingFunction(false, '.popup_add_profile');
+        profileEditPopup.loadingFunction(false, '.popup_add_profile');
        api.editProfile(data)
        .then((data) => {userClass.setUserInfo(data);
-                        userClass.updateUserInfo(data)})
+                        profileEditPopup.close();
+                        userClass.updateUserInfo(data);
+                        })
        .catch(err => {console.log(err)})
        .finally(() => {
-           profileEditPopup.close();
-        userClass.loadingFunction(true, '.popup_add_profile');
+        profileEditPopup.loadingFunction(true, '.popup_add_profile');
        })
 
     } 
@@ -131,18 +134,18 @@ imagePopup.setEventListeners();
     const cardAddPopup = new PopupWithForm({ 
         popupSelector: '.popup_add_card', 
         handleFormSubmit: (item) => { 
-            userClass.loadingFunction(false, '.popup_add_card');
+            cardAddPopup.loadingFunction(false, '.popup_add_card');
             api.createCard(item)
         .then((item) => {
             const card = createClassCard(item);
-            newCards.prependItem(card)
+            newCards.prependItem(card);
+            cardAddPopup.close();
         })
     .catch((err) => {
         console.log('Не удалось отправить карточку ' + err)
     })
     .finally(() => {
-        cardAddPopup.close()
-        userClass.loadingFunction(true, '.popup_add_card');
+        cardAddPopup.loadingFunction(true);
        })
 } 
     }) 
@@ -151,17 +154,17 @@ imagePopup.setEventListeners();
     const avatarEditPopup = new PopupWithForm({
         popupSelector: '.popup_add_avatar',
         handleFormSubmit: (item) => {
-            userClass.loadingFunction(false, '.popup_add_avatar');
+            avatarEditPopup.loadingFunction(false);
             api.editAvatar(item)
             .then((item) => {
                 userClass.editPhoto(item);
+                avatarEditPopup.close();
             })
             .catch((err) => {
                 console.log('Не удалось отправить карточку ' + err)
             })
             .finally(() => {
-                avatarEditPopup.close()
-                userClass.loadingFunction(true, '.popup_add_avatar');
+                avatarEditPopup.loadingFunction(true);
                })
         }
     })

@@ -31,17 +31,6 @@ export default class UserInfo {
         this._avatarValue.style.backgroundImage = `url(${data.avatar})`;
     }
 
-    loadingFunction (bull, selector) {
-        let SubmitButton = document
-        .querySelector(selector)
-        .querySelector('.button_type_saved')
-        if (bull === false) {
-                SubmitButton.textContent = "Сохранение..."
-        } else {
-                SubmitButton.textContent = "Сохранить"
-        }
-    }
-
     setUserInfo({name, about, avatar, _id}) {
         this._name = name;
         this._about = about;
