@@ -1,14 +1,5 @@
-.overlay {
-   /* visibility: visible;
-    opacity: 1;
-    transition: visibility 1s linear, opacity 1s linear;
-    width: 100vw;
-    /*margin-left: calc(-50vw + 50%);*/
-   /* height: 100vh;
-    overflow: visible;*/
-    visibility: visible;
-    opacity: 1;
-    transition: visibility 1s linear, opacity 1s linear;
-    width: 100vw;
-    height: 100vh;
-}
+.overlay { 
+    visibility: visible; 
+    opacity: 1; 
+    transition: visibility 1s linear, opacity 1s linear; 
+} 
