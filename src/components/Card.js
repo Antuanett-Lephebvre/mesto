@@ -76,6 +76,7 @@ export default class Card {
             this._element
             .querySelector('.like-container__like')
             .classList
+            .remove('like-container__like_active')
         }
  
         cardDelete() {
